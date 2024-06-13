@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class Player {
+public class Player {
+    static private int healthPoint = 4;
+    private int point;
+
 }
