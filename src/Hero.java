@@ -26,14 +26,11 @@ public class Hero extends JPanel {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-        g2.drawImage(heroImage, 0, 480,(int)screenSize.getWidth()/9 ,(int)screenSize.getHeight()/4 , game);
+        g2.drawImage(heroImage, 0, 580,(int)screenSize.getWidth()/9 ,(int)screenSize.getHeight()/4 , game);
     }
     public void move(){
         x = x + dx ;
     }
-
-
-
 
 
 }
