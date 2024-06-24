@@ -3,11 +3,18 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class Main extends JFrame {
+     static JPanel centerPanel= new JPanel();
+     static Game m = new Game();
+     Menu menu = new Menu();
+    static void showGamePanel(){
+        centerPanel.add(m);
+    }
     public Main(){
-
-        Game m = new Game();
+        centerPanel.setLayout( new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
+        centerPanel.add(menu);
         addKeyListener(m);
         add(m);
+        add(centerPanel);
         setTitle("Hoppenhelm");
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
