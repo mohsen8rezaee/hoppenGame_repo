@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Game extends JPanel implements Runnable , KeyListener{
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public ArrayList<Block> BlockList = new ArrayList<>() ;
+
     Block test = new BrokenBlack( 0 ,600);
     private BufferedImage background;
     private Thread hoppen;
@@ -36,21 +37,32 @@ public class Game extends JPanel implements Runnable , KeyListener{
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,RenderingHints.VALUE_STROKE_PURE);
         g2.drawImage(background,0,0,(int)screenSize.getWidth(),(int)screenSize.getHeight(),Color.black,this);
 //        test.paint(g2);
-        for (int i = 0; i < 10; i++) {
-            int random = RandomNums.getRandomNumber(1,4);//create a random number between 1 & 3
-            switch (random){
-                case 1 : BlockList.add(new SimpleBlock((((int)screenSize.getWidth())/10)*i,820));
-                break;
-                case 2 :  BlockList.add(new BrokenBlack((((int)screenSize.getWidth())/10)*i,820));
-                break;
-                case 3 :  BlockList.add(new EnemyBlock((((int)screenSize.getWidth())/10)*i,820));
-                break;
+        for (int j = 0; j < 3; j++){
+            switch (j){
+                default:
+                    BlockList.add(new SimpleBlock((((int)screenSize.getWidth())/10)*j,820));
             }
         }
+
+
+
         for (Block block : BlockList) {
             block.paint(g2);
         }
         heroObject.paint(g2);
+    }
+    public void randomBlock(){
+        for (int i = 3; i < 10; i++) {
+            int random = RandomNums.getRandomNumber(1,4);//create a random number between 1 & 3
+            switch (random){
+                case 1 : BlockList.add(new SimpleBlock((((int)screenSize.getWidth())/10)*i,820));
+                    break;
+                case 2 :  BlockList.add(new BrokenBlack((((int)screenSize.getWidth())/10)*i,820));
+                    break;
+                case 3 :  BlockList.add(new EnemyBlock((((int)screenSize.getWidth())/10)*i,820));
+                    break;
+            }
+        }
     }
     public void move(){
         heroObject.move();
@@ -62,16 +74,26 @@ public class Game extends JPanel implements Runnable , KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        heroObject.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        heroObject.keyReleased(e);
     }
 
     @Override
     public void run() {
+        randomBlock();
+        while(true){
+            move();
+            repaint();
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
